@@ -4,7 +4,7 @@ Digital Bokningstjänst för Mötesrum
 Gruppen ska utveckla en bokningstjänst där användare kan boka mötesrum för specifika tider och datum.
 
 //Lägg till teknisk specifikation om hur en användare installerar och öppnar upp projektet på sin dator.
-
+kör "npm i" i konsollen för att installera de paket som behövs för att kunna starta upp projektet.
 
 KRAV
 Systemet ska hantera:
