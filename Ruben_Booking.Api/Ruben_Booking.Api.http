@@ -1,6 +1,0 @@
-@Ruben_Booking.Api_HostAddress = http://localhost:5133
-
-GET {{Ruben_Booking.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
