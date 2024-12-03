@@ -85,6 +85,8 @@ public/uploads/*
 .tsbuildinfo
 .eslintcache
 .vs
+obj
+bin
 
 ############################
 # Node.js
