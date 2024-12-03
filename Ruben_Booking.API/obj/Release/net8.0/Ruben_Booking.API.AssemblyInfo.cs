@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ruben_Booking.API")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f68c6983ca98560ec0b5a91949f8b7bb1ce42a66")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4bb7a7d7a4c7c4cb225e318954dca80806d9e99e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ruben_Booking.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ruben_Booking.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
