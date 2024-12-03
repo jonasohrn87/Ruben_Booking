@@ -1,6 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
 using Ruben_Booking.API.Database;
+using Ruben_Booking.API.Endpoints;
+using Ruben_Booking.API.Services;
+using Ruben_Booking.API.Services.Interfaces;
 
 namespace Ruben_Booking.API
 {
@@ -19,6 +22,8 @@ namespace Ruben_Booking.API
 
             builder.Services.AddDbContext<RubenContext>(options =>
             options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=RubenDB"));
+
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             builder.Services.AddCors(options =>
                 options.AddPolicy("AllowAll", policy =>
@@ -42,6 +47,8 @@ namespace Ruben_Booking.API
             app.UseAuthorization();
 
             app.UseCors("AllowAll");
+
+            app.MapEmployeeEndpoints();
 
             app.Run();
         }

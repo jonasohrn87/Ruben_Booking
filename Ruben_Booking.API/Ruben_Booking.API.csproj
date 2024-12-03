@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Db\" />
-    <Folder Include="Endpoints\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 
