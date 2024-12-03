@@ -64,8 +64,8 @@ namespace Ruben_Booking.API.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Salt")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Salt")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("UserCredential")
                         .HasColumnType("nvarchar(max)");
@@ -80,8 +80,24 @@ namespace Ruben_Booking.API.Migrations
                             Id = 1,
                             Email = "Janne.Claesson@Firman.se",
                             Password = "wx09ehRK2UGh3/5fJdPqmp9a/Y2DWx6cmoEkaKuU854=",
-                            Salt = "0xC31D3D7A144AD941A1DFFE5F25D3EA9A",
+                            Salt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                             UserCredential = "CSKED18372"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "Jöns.Jönsson@Firman.se",
+                            Password = "wx09ehRK2UGh3/5fJdPqmp9a/Y2DWx6cmoEkaKuU854=",
+                            Salt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                            UserCredential = "CSAPD18372"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "Martin.Beck@Firman.se",
+                            Password = "wx09ehRK2UGh3/5fJdPqmp9a/Y2DWx6cmoEkaKuU854=",
+                            Salt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                            UserCredential = "CSKAE18372"
                         });
                 });
 
@@ -102,8 +118,8 @@ namespace Ruben_Booking.API.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Salt")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Salt")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("UserCredential")
                         .HasColumnType("nvarchar(max)");
@@ -119,8 +135,26 @@ namespace Ruben_Booking.API.Migrations
                             Email = "Hasse.Jansson@Snut.se",
                             Password = "wO9z6fREqcI0DubZUixB5VCeu01MUUQDYCXylmRbziM=",
                             PhoneNumber = "0738239122",
-                            Salt = "0xC0EF73E9F444A9C2340EE6D9522C41E5",
-                            UserCredential = "EOESK20193"
+                            Salt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                            UserCredential = "EOESK20393"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "Klas.Fransson@Snut.se",
+                            Password = "wO9z6fREqcI0DubZUixB5VCeu01MUUQDYCXylmRbziM=",
+                            PhoneNumber = "0738115122",
+                            Salt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                            UserCredential = "EAOKE90113"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "Ruben.Rubensson@Snut.se",
+                            Password = "wO9z6fREqcI0DubZUixB5VCeu01MUUQDYCXylmRbziM=",
+                            PhoneNumber = "0728239622",
+                            Salt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                            UserCredential = "EKKLE10395"
                         });
                 });
 
@@ -158,12 +192,42 @@ namespace Ruben_Booking.API.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Längst ner i korridoren till höger om den vänstra dörren.",
+                            Description = "Konferensrum 1",
                             HasProjector = true,
                             HasWhiteBoard = true,
                             IsInService = true,
                             MaxSeats = 8,
                             Name = "Sommarängen"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Konferensrum 2",
+                            HasProjector = true,
+                            HasWhiteBoard = false,
+                            IsInService = true,
+                            MaxSeats = 4,
+                            Name = "Höstvinden"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Konferensrum 3",
+                            HasProjector = false,
+                            HasWhiteBoard = true,
+                            IsInService = true,
+                            MaxSeats = 6,
+                            Name = "Vinterstugan"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Konferensrum 4",
+                            HasProjector = true,
+                            HasWhiteBoard = true,
+                            IsInService = false,
+                            MaxSeats = 6,
+                            Name = "Vårsolen"
                         });
                 });
 #pragma warning restore 612, 618

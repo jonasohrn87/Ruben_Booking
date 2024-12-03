@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Ruben_Booking.API.Migrations
 {
     /// <inheritdoc />
@@ -37,7 +39,7 @@ namespace Ruben_Booking.API.Migrations
                     UserCredential = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,7 +56,7 @@ namespace Ruben_Booking.API.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,17 +84,33 @@ namespace Ruben_Booking.API.Migrations
             migrationBuilder.InsertData(
                 table: "Consultants",
                 columns: new[] { "Id", "Email", "Password", "Salt", "UserCredential" },
-                values: new object[] { 1, "Janne.Claesson@Firman.se", "wx09ehRK2UGh3/5fJdPqmp9a/Y2DWx6cmoEkaKuU854=", "0xC31D3D7A144AD941A1DFFE5F25D3EA9A", "CSKED18372" });
+                values: new object[,]
+                {
+                    { 1, "Janne.Claesson@Firman.se", "wx09ehRK2UGh3/5fJdPqmp9a/Y2DWx6cmoEkaKuU854=", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "CSKED18372" },
+                    { 2, "Jöns.Jönsson@Firman.se", "wx09ehRK2UGh3/5fJdPqmp9a/Y2DWx6cmoEkaKuU854=", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "CSAPD18372" },
+                    { 3, "Martin.Beck@Firman.se", "wx09ehRK2UGh3/5fJdPqmp9a/Y2DWx6cmoEkaKuU854=", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "CSKAE18372" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "Id", "Email", "Password", "PhoneNumber", "Salt", "UserCredential" },
-                values: new object[] { 1, "Hasse.Jansson@Snut.se", "wO9z6fREqcI0DubZUixB5VCeu01MUUQDYCXylmRbziM=", "0738239122", "0xC0EF73E9F444A9C2340EE6D9522C41E5", "EOESK20193" });
+                values: new object[,]
+                {
+                    { 1, "Hasse.Jansson@Snut.se", "wO9z6fREqcI0DubZUixB5VCeu01MUUQDYCXylmRbziM=", "0738239122", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "EOESK20393" },
+                    { 2, "Klas.Fransson@Snut.se", "wO9z6fREqcI0DubZUixB5VCeu01MUUQDYCXylmRbziM=", "0738115122", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "EAOKE90113" },
+                    { 3, "Ruben.Rubensson@Snut.se", "wO9z6fREqcI0DubZUixB5VCeu01MUUQDYCXylmRbziM=", "0728239622", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "EKKLE10395" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Rooms",
                 columns: new[] { "Id", "Description", "HasProjector", "HasWhiteBoard", "IsInService", "MaxSeats", "Name" },
-                values: new object[] { 1, "Längst ner i korridoren till höger om den vänstra dörren.", true, true, true, 8, "Sommarängen" });
+                values: new object[,]
+                {
+                    { 1, "Konferensrum 1", true, true, true, 8, "Sommarängen" },
+                    { 2, "Konferensrum 2", true, false, true, 4, "Höstvinden" },
+                    { 3, "Konferensrum 3", false, true, true, 6, "Vinterstugan" },
+                    { 4, "Konferensrum 4", true, true, false, 6, "Vårsolen" }
+                });
         }
 
         /// <inheritdoc />
