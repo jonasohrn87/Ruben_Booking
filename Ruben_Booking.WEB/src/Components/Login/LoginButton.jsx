@@ -1,14 +1,17 @@
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginButton = () => {
     const [messageForUnitTest, setMessageForUnitTest] = useState("");
-    const handleClick = () => {
+    const navigateToBookingPage = useNavigate();
+    const handleLoginButtonClick = () => {
         setMessageForUnitTest("Login button pressed");
+        navigateToBookingPage('/booking');
     };
-
+    
     return (
         <div>
-        <button onClick={handleClick}>Login</button>
+        <button onClick={handleLoginButtonClick}>Login</button>
         <p>{messageForUnitTest}</p>
         </div>
     );
