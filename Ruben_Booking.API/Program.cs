@@ -26,6 +26,7 @@ namespace Ruben_Booking.API
             builder.Services.AddScoped<IUserService, EmployeeService>();
             builder.Services.AddScoped<ConsultantService>();
             builder.Services.AddScoped<ILoginService, LoginService>();
+            builder.Services.AddScoped<IRoomService, RoomService>();
    
 
             builder.Services.AddCors(options =>
@@ -54,7 +55,7 @@ namespace Ruben_Booking.API
             app.MapEmployeeEndpoints();
             app.MapConsultantEndpoints();
             app.MapLoginEndpoints();
-            
+            app.MapRoomEndpoints();
 
             app.Run();
         }
