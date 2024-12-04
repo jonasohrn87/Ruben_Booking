@@ -3,6 +3,7 @@
   --background-color: #FFFFFF;
   --primary-color: #0C3256;
   --max-width: 1400px;
+  --max-width-header: 800px;
 }
 
 * {
@@ -13,7 +14,8 @@
 
 body {
   display: flex;
-  background-color: antiquewhite;
+  background-color: var(--background-color);
+  color: var(--primary-color);
   align-items: flex-start;
 }
 
@@ -25,15 +27,16 @@ body {
   border-bottom: 2em solid var(--header-color);
 }
 .header-container .header-content {
-  max-width: var(--max-width);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width-header);
   margin: auto;
-  width: 100%;
 }
 
 .main-container {
   display: flex;
   justify-content: center;
-  color: var(--primary-color);
   padding: 2rem;
   max-width: var(--max-width);
   margin: auto;
