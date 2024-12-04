@@ -1,7 +1,42 @@
-body {
-    background-color: #FFFFFF;
+:root {
+    --header-color: #1862A8;
+    --background-color: #FFFFFF;
+    --primary-color: #0C3256;
+    --max-width: 1400px;
 }
 
-.RubenBooking-header {
-    color: #1862A8;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    background-color: antiquewhite;
+    align-items: flex-start;
+}
+
+.header-container {
+    width: 100vw;
+    color: var(--header-color);
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-bottom: 2em solid var(--header-color);
+
+    .header-content {
+    max-width: var(--max-width);
+    margin: auto;
+    width: 100%;
+    }
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    color: var(--primary-color);
+    // background-color: var(--background-color);
+    padding: 2rem;
+    max-width: var(--max-width);
+    margin: auto;
 }
