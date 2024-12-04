@@ -10,9 +10,9 @@ namespace Ruben_Booking.API.Endpoints
             app.MapGet("/api/employee/{id}", GetEmployeeById);
         }
 
-        static async Task<IResult> GetEmployeeById(IEmployeeService employeeService, int id)
+        static async Task<IResult> GetEmployeeById(IUserService employeeService, int id)
         {
-            return await employeeService.GetEmployeeById(id);
+            return await employeeService.GetUserById(id);
         }
     }
 }

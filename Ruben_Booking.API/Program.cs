@@ -23,7 +23,10 @@ namespace Ruben_Booking.API
             builder.Services.AddDbContext<RubenContext>(options =>
             options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=RubenDB"));
 
-            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IUserService, EmployeeService>();
+            builder.Services.AddScoped<ConsultantService>();
+            builder.Services.AddScoped<ILoginService, LoginService>();
+   
 
             builder.Services.AddCors(options =>
                 options.AddPolicy("AllowAll", policy =>
@@ -49,6 +52,9 @@ namespace Ruben_Booking.API
             app.UseCors("AllowAll");
 
             app.MapEmployeeEndpoints();
+            app.MapConsultantEndpoints();
+            app.MapLoginEndpoints();
+            
 
             app.Run();
         }
