@@ -35,9 +35,17 @@ body {
 }
 
 .main-container {
-  display: flex;
-  justify-content: center;
   padding: 2rem;
   max-width: var(--max-width);
   margin: auto;
+}
+
+.bookingPage-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50em, 2fr));
+}
+
+.bookableRoom-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(5em, 2fr));
 }/*# sourceMappingURL=App.css.map */

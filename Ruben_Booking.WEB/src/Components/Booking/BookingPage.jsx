@@ -3,9 +3,8 @@ import LogoutButton from "../Logout/LogoutButton";
 
 const BookingPage = () => {
     return (
-        <div>
-            <LogoutButton />
-            <h1>Ruben Booking</h1>
+        <div className="bookingPage-container">
+            <h3>Boka rum här</h3>
         </div>
     );
 }
