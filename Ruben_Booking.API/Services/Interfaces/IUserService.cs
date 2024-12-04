@@ -2,8 +2,8 @@
 
 namespace Ruben_Booking.API.Services.Interfaces
 {
-    public interface IEmployeeService
+    public interface IUserService
     {
-        Task<IResult> GetEmployeeById(int id);
+        Task<IResult> GetUserById(int id);
     }
 }
