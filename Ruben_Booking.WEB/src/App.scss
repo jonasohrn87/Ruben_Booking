@@ -40,3 +40,20 @@ body {
     max-width: var(--max-width);
     margin: auto;
 }
+
+.loginFormContainer{
+    margin: 2rem;
+    padding: 1rem;
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#username{
+    display:flex;
+}
+
+#password{
+    display:flex;
+}
