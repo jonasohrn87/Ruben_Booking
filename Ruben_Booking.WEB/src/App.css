@@ -41,11 +41,33 @@ body {
 }
 
 .bookingPage-container {
+  max-width: var(--max-width);
+  margin: auto;
+}
+.bookingPage-container .bookingPage-rooms {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50em, 2fr));
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+@media (min-width: 600px) {
+  .bookingPage-container .bookingPage-rooms {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.bookableRoom-roomNumber {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.3em;
 }
 
 .bookableRoom-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(5em, 2fr));
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--primary-color);
+  padding: 1rem;
+  border-radius: 4px;
+  gap: 0.5rem;
+  min-height: 14em;
 }/*# sourceMappingURL=App.css.map */
