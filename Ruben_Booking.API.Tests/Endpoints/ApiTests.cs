@@ -12,6 +12,9 @@ namespace Ruben_Booking.API.Tests.Endpoints
         private readonly ITestOutputHelper _output;
         private readonly RubenContext _context;
         private readonly DbContextOptions<RubenContext> _options;
+        private const string EMPLOYEE_EMAIL = "Hasse.Jansson@Snut.se";
+        private const string CONSULTANT_EMAIL = "Janne.Claesson@Firman.se";
+        private const int ID = 1;
 
         public ApiTests(ITestOutputHelper output)
         {
@@ -25,37 +28,34 @@ namespace Ruben_Booking.API.Tests.Endpoints
         [Fact]
         public async Task GetEmployeeById_ReturnsOk_WhenUserExists()
         {
-            const string EMAIL = "Hasse.Jansson@Snut.se";
             const string PHONE_NUMBER = "0738239122";
-            const int EMPLOYEE_ID = 1;
-
+            
             var employeeService = new EmployeeService(_context);
 
-            var result = await employeeService.GetUserById(EMPLOYEE_ID);
+            var result = await employeeService.GetUserById(ID);
 
             var okResult = Assert.IsType<Ok<Employee>>(result);
             var employee = Assert.IsType<Employee>(okResult.Value);
 
-            Assert.Equal(EMAIL, employee.Email);
-            Assert.Equal(EMPLOYEE_ID, employee.Id);
+            Assert.Equal(EMPLOYEE_EMAIL, employee.Email);
+            Assert.Equal(ID, employee.Id);
             Assert.Equal(PHONE_NUMBER, employee.PhoneNumber);
 
-            _output.WriteLine($"Input email: {EMAIL} response email: {employee.Email}");
+            _output.WriteLine($"Input email: {EMPLOYEE_EMAIL} response email: {employee.Email}");
         }
         [Fact]
         public async Task MatchEmployeeLoginCredentials_ReturnsOk_WhenMatched()
         {
-            const string EMAIL = "Hasse.Jansson@Snut.se";
             const string PASSWORD = "wO9z6fREqcI0DubZUixB5VCeu01MUUQDYCXylmRbziM=";
 
             var loginService = new LoginService(_context);
 
-            var result = await loginService.MatchLoginCredentials(EMAIL, PASSWORD);
+            var result = await loginService.MatchLoginCredentials(EMPLOYEE_EMAIL, PASSWORD);
 
             var okResult = Assert.IsType<Ok<Employee>>(result);
             var employee = Assert.IsType<Employee>(okResult.Value);
 
-            Assert.Equal(EMAIL, employee.Email);
+            Assert.Equal(EMPLOYEE_EMAIL, employee.Email);
             Assert.Equal(PASSWORD, employee.Password);
         }
 
@@ -63,36 +63,33 @@ namespace Ruben_Booking.API.Tests.Endpoints
         [Fact]
         public async Task GetConsultantById_ReturnsOk_WhenUserExists()
         {
-            const string EMAIL = "Janne.Claesson@Firman.se";
-            const int CONSULTANT_ID = 1;
 
             var consultantService = new ConsultantService(_context);
 
-            var result = await consultantService.GetUserById(CONSULTANT_ID);
+            var result = await consultantService.GetUserById(ID);
 
             var okResult = Assert.IsType<Ok<Consultant>>(result);
             var consultant = Assert.IsType<Consultant>(okResult.Value);
 
-            Assert.Equal(EMAIL, consultant.Email);
-            Assert.Equal(CONSULTANT_ID, consultant.Id);
+            Assert.Equal(CONSULTANT_EMAIL, consultant.Email);
+            Assert.Equal(ID, consultant.Id);
 
-            _output.WriteLine($"Input email: {EMAIL} response email: {consultant.Email}");
+            _output.WriteLine($"Input email: {CONSULTANT_EMAIL} response email: {consultant.Email}");
         }
 
         [Fact]
         public async Task MatchConsultantLoginCredentials_ReturnsOk_WhenMatched()
         {
-            const string EMAIL = "Janne.Claesson@Firman.se";
             const string PASSWORD = "wx09ehRK2UGh3/5fJdPqmp9a/Y2DWx6cmoEkaKuU854=";
 
             var loginService = new LoginService(_context);
 
-            var result = await loginService.MatchLoginCredentials(EMAIL, PASSWORD);
+            var result = await loginService.MatchLoginCredentials(CONSULTANT_EMAIL, PASSWORD);
 
             var okResult = Assert.IsType<Ok<Consultant>>(result);
             var consultant = Assert.IsType<Consultant>(okResult.Value);
 
-            Assert.Equal(EMAIL, consultant.Email);
+            Assert.Equal(CONSULTANT_EMAIL, consultant.Email);
             Assert.Equal(PASSWORD, consultant.Password);
         }
 
@@ -113,15 +110,13 @@ namespace Ruben_Booking.API.Tests.Endpoints
         [Fact]
         public async Task GetRoomById_ReturnsOk_WhenRoomExists ()
         {
-            const int ROOM_ID = 1; 
-
             var roomService = new RoomService(_context);
-            var result = await roomService.GetRoomById(ROOM_ID);
+            var result = await roomService.GetRoomById(ID);
 
             var okResult = Assert.IsType<Ok<Room>>(result);
             var room = Assert.IsType<Room>(okResult.Value);
 
-            Assert.Equal(ROOM_ID, room.Id);
+            Assert.Equal(ID, room.Id);
         }
 
     }
