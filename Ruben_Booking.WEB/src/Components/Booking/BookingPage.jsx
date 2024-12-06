@@ -1,23 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import BookableRoom from "../Room/BookableRoom";
-import { getRoomService } from "../../Services/apiService";
+import { useHandleRoom } from "../../Services/room/handleRoom";
 
 const BookingPage = () => {
-  const [bookableRoomInfo, setBookableRoomInfo] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
-
-  useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const rooms = await getRoomService.getAllRooms();
-        setBookableRoomInfo(rooms);
-      } catch (errorFetchingRooms) {
-        setErrorMessage("Kunde inte hämta rum, försök igen senare");
-        console.error(errorFetchingRooms);
-      }
-    };
-    fetchRooms();
-  }, []);
+    const { bookableRoomInfo, errorMessage } = useHandleRoom();
 
   if (errorMessage) {
     return <div>{errorMessage}</div>;

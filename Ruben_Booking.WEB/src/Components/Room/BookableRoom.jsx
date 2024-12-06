@@ -19,9 +19,10 @@ const BookableRoom = ({
           <p>{maxSeats} platser</p>
           <p>{hasProjector ? "Har projektor" : "Har ej projektor"}</p>
           <p>{hasWhiteBoard ? "Har whiteboard" : "Har ej whiteboard"}</p>
-          <h3>{isInService ? "" : "Ur funktion"}</h3>
         </div>
-        {isInService ? <button>Boka rum</button> : <p>Rummet är ur funktion</p>}
+        <h3>
+          {isInService ? <button>Boka rum</button> : "Rummet är ur funktion"}
+        </h3>
       </div>
     </div>
   );
