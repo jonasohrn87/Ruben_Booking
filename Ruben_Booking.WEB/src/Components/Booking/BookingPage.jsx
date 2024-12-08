@@ -1,9 +1,10 @@
 import React from "react";
 import BookableRoom from "../Room/BookableRoom";
+import BookingForm from "./BookingForm";
 import { useHandleRoom } from "../../Services/room/handleRoom";
 
 const BookingPage = () => {
-    const { bookableRoomInfo, errorMessage } = useHandleRoom();
+  const { bookableRoomInfo, errorMessage } = useHandleRoom();
 
   if (errorMessage) {
     return <div>{errorMessage}</div>;
@@ -11,7 +12,12 @@ const BookingPage = () => {
 
   return (
     <div className="bookingPage-container">
-      <h3>Boka rum här</h3>
+      <div>
+        <h3>Boka rum här</h3>
+      </div>
+      <div>
+        <BookingForm rooms={bookableRoomInfo} />
+      </div>
       <div className="bookingPage-rooms">
         {bookableRoomInfo.map((room) => (
           <BookableRoom key={room.id} {...room} />

@@ -4,6 +4,9 @@
   --primary-color: #0C3256;
   --max-width: 1400px;
   --max-width-header: 800px;
+  --roomFunctional-background-color: #cac9c9;
+  --roomOutOfFunction-background-color: #3e4041;
+  --roomOutOfFunctionText-color: rgb(201, 195, 195);
 }
 
 * {
@@ -60,12 +63,12 @@ body {
 .bookingPage-container {
   max-width: var(--max-width);
   margin: auto;
+  padding: 0.5rem;
 }
 .bookingPage-container .bookingPage-rooms {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  padding: 1rem;
 }
 @media (min-width: 600px) {
   .bookingPage-container .bookingPage-rooms {
@@ -86,5 +89,24 @@ body {
   padding: 1rem;
   border-radius: 4px;
   gap: 0.5rem;
-  min-height: 14em;
+  min-height: 12em;
+}
+.bookableRoom-container.roomFunctional {
+  background-color: var(--roomFunctional-background-color);
+}
+.bookableRoom-container.roomOutOfFunction {
+  background-color: var(--roomOutOfFunction-background-color);
+}
+.bookableRoom-container.roomOutOfFunction .roomOutOfFunctionText {
+  color: var(--roomOutOfFunctionText-color);
+}
+
+.bookingForm-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  background-color: #f3efef;
+  border: 2px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 0.4em;
+  min-height: 11.7em;
 }/*# sourceMappingURL=App.css.map */
