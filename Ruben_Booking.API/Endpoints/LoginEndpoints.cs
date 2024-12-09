@@ -14,7 +14,6 @@ namespace Ruben_Booking.API.Endpoints
 
         private static async Task<IResult> HandleLogin(ILoginService loginService, [FromBody] LoginRequest request)
         {
-            // Matcha credentials från login service
             return await loginService.MatchLoginCredentials(request.Email, request.Password);
         }
     }
