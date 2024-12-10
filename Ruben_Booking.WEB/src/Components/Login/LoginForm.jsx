@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authenticateUserLogginCredentialsService } from "../../Services/apiService";
 
 const LoginForm = ({ onSubmit }) => {
   const [username, setUsername] = useState("");
@@ -13,24 +14,10 @@ const LoginForm = ({ onSubmit }) => {
     onSubmit({ username, password });
 
     try {
-      const response = await fetch("https://localhost:7294/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ "email":username, "password":password }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Invalid credentials");
-      }
-
-      const data = await response.json();
-      console.log("Response data:", data); 
+      const data = await authenticateUserLogginCredentialsService.login(username, password);
       onSubmit(data);
       navigate("/booking");
     } catch (error) {
-        console.error("Error caught:", error);
       setErrorMessage("Invalid username or password. Please try again.");
     }
   };
