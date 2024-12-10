@@ -25,6 +25,7 @@ const LoginForm = ({ onSubmit }) => {
   return (
     <div className="loginFormContainer">
       <form 
+      id="login-form"
       method="post"
       role="form" onSubmit={handleSubmit}>
         <label htmlFor="username">Username</label>
