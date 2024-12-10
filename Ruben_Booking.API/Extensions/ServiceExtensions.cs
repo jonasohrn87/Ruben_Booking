@@ -11,6 +11,7 @@ namespace Ruben_Booking.API.Extensions
             services.AddScoped<ConsultantService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IBookingService, BookingService>();
 
             services.AddCors(options =>
                 options.AddPolicy("AllowAll", policy =>
@@ -31,6 +32,5 @@ namespace Ruben_Booking.API.Extensions
 
             return services;
         }
-        
     }
 }

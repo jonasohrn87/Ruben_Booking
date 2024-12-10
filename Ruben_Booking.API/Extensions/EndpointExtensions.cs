@@ -10,6 +10,7 @@ namespace Ruben_Booking.API.Extensions
             app.MapConsultantEndpoints();
             app.MapLoginEndpoints();
             app.MapRoomEndpoints();
+            app.MapBookingEndpoints();
         }
     }
 }
