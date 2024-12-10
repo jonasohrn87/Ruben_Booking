@@ -17,3 +17,19 @@ export const getRoomService = {
     return await response.json();
   },
 };
+
+export const bookingService = {
+  async createBooking(bookingData) {
+      const response = await fetch(`${API_RUBENBOOKING_URL}/bookings`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bookingData)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to create a booking');
+      }
+      return await response.json();
+  }
+};

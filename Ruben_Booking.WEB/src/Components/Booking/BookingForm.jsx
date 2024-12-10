@@ -6,6 +6,7 @@ import BookingRoomTypes from "./BookingRoomTypes";
 import { useBookingFormState } from "../../Services/booking/bookingFormState";
 import PropTypes from "prop-types";
 import { useHandleBooking } from "../../Services/booking/handleBooking";
+import { bookingFormSubmit } from "../../Services/booking/bookingFormSubmit";
 
 const BookingForm = (props) => {
   const {
@@ -15,6 +16,7 @@ const BookingForm = (props) => {
     bookingFormData,
     handleCheckboxType,
     handleInputChange,
+    resetBookingForm,
   } = useBookingFormState();
 
   const { roomsAvailableToBook, checkAvailableRooms } = useHandleBooking(
@@ -33,19 +35,11 @@ const BookingForm = (props) => {
     bookingFormData.timeTo,
   ]);
 
-  const handleBookingFormSubmit = (event) => {
-    event.preventDefault();
-    const bookingData = {
-      roomId: bookingFormData.selectedRoom,
-      dateFrom: bookingFormData.startDate,
-      dateTo: bookingFormData.endDate || bookingFormData.startDate,
-      ...(bookingLengthCheckbox === "partOfDayBookingSelected" && {
-        timeFrom: bookingFormData.timeFrom,
-        timeTo: bookingFormData.timeTo,
-      }),
-    };
-    console.log("Booking request:", bookingData);
-  };
+      const handleBookingFormSubmit = bookingFormSubmit(
+        bookingFormData,
+        bookingLengthCheckbox,
+        resetBookingForm
+      );
 
   return (
     <div className="bookingForm-container">
