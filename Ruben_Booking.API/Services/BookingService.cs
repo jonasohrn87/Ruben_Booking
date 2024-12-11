@@ -46,17 +46,6 @@ namespace Ruben_Booking.API.Services
                 return Results.Created($"/api/booking/create/{booking.Entity.Id}", booking);
             });
         }
-
-        public async Task<IResult> GetAllBookings()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IResult> GetBookingById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IResult> DeleteBookingById(int id)
         {
             var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
@@ -70,10 +59,21 @@ namespace Ruben_Booking.API.Services
             return Results.NotFound($"The booking with id {id} was not found");
         }
 
-        public async Task<IResult> UpdateBookingById(int id, Booking booking)
+        public async Task<IResult> GetAllBookings()
         {
-            throw new NotImplementedException();
+            var bookings = await _context.Bookings.ToListAsync();
+
+            return bookings == null
+                ? Results.NotFound("No bookings were found.")
+                : Results.Ok(bookings);
         }
 
+        public async Task<IResult> GetBookingById(int id)
+        {
+            var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
+            return booking == null
+                ? Results.NotFound($"Booking id {id} not found.")
+                : Results.Ok(booking);
+        }
     }
 }

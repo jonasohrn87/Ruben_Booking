@@ -8,5 +8,6 @@ namespace Ruben_Booking.API.Services.Interfaces
         Task<IResult> GetAllBookings();
         Task<IResult> GetBookingById(int id);
         Task<IResult> CreateBooking(Booking booking);
+        Task<IResult> DeleteBookingById(int id);
     }
 }
