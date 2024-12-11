@@ -14,7 +14,7 @@ describe("LoginPage component", () => {
             <LoginPage />
             </MemoryRouter>);
         
-        const heading = screen.getByRole("heading", { name: /login/i });
+        const heading = screen.getByRole("heading", { name: "Login" });
         expect(heading).toBeInTheDocument();
     });
 
@@ -23,7 +23,7 @@ describe("LoginPage component", () => {
             <LoginPage />
             </MemoryRouter>);
         
-        const loginButton = screen.getByRole("button", { name: /mocked login button/i});
+        const loginButton = screen.getByRole("button", { name: "Login"});
         expect(loginButton).toBeInTheDocument();
     });    
 });

@@ -1,5 +1,4 @@
 import React from "react";
-import LoginButton from "./LoginButton";
 import LoginForm from "./LoginForm";
 
 const LoginPage = () => {
@@ -12,7 +11,6 @@ const LoginPage = () => {
         <div>
             <h1>Login</h1>
             <LoginForm onSubmit={handleLogin} />
-            <LoginButton />
         </div>
     );
 };
