@@ -5,6 +5,7 @@ using Ruben_Booking.API.Database;
 using Ruben_Booking.API.Database.Models;
 using Ruben_Booking.API.Services;
 using Ruben_Booking.API.Tests.Database;
+using Ruben_Booking.API.ErrorHandling;
 
 namespace Ruben_Booking.API.Tests.Endpoints
 {
@@ -12,6 +13,7 @@ namespace Ruben_Booking.API.Tests.Endpoints
     {
         private readonly ITestOutputHelper _output;
         private readonly TestCopyDbContext _context;
+        private readonly ErrorHandler _errorHandler;
         private readonly DbContextOptions<RubenContext> _options;
         private const string EMPLOYEE_EMAIL = "Hasse.Jansson@Snut.se";
         private const string CONSULTANT_EMAIL = "Janne.Claesson@Firman.se";
@@ -28,7 +30,7 @@ namespace Ruben_Booking.API.Tests.Endpoints
                 .Options;
             _output = output;
             _context = new TestCopyDbContext(_options);
-
+            _errorHandler = new ErrorHandler();
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
         }
@@ -130,7 +132,7 @@ namespace Ruben_Booking.API.Tests.Endpoints
         [Fact]
         public async Task GetAllBookings_ReturnsOk_WhenNoBookingsExist()
         {
-            var bookingService = new BookingService(_context);
+            var bookingService = new BookingService(_context, _errorHandler);
             var result = await bookingService.GetAllBookings();
 
             var okResult = Assert.IsType<Ok<List<Booking>>>(result);
@@ -148,7 +150,7 @@ namespace Ruben_Booking.API.Tests.Endpoints
         [Fact]
         public async Task GetAllBookings_ReturnsOk_WhenBookingsExist()
         {
-            var bookingService = new BookingService(_context);
+            var bookingService = new BookingService(_context, _errorHandler);
             var result = await bookingService.GetAllBookings();
          
             var okResult = Assert.IsType<Ok<List<Booking>>>(result);
@@ -173,7 +175,7 @@ namespace Ruben_Booking.API.Tests.Endpoints
         [Fact]
         public async Task GetBookingById_ReturnsOk_WhenBookingExists()
         {
-            var bookingService = new BookingService(_context);
+            var bookingService = new BookingService(_context, _errorHandler);
 
             var result = await bookingService.GetBookingById(ID);
 
