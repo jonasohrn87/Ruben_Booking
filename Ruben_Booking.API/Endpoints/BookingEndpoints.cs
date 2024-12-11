@@ -34,7 +34,7 @@ namespace Ruben_Booking.API.Endpoints
                 .WithDescription("Endpoint to get booking by the specified id.");
         }
 
-        private static async Task<IResult> CreateBooking(IBookingService service, [FromBody] Booking booking)
+        private static async Task<IResult> CreateBooking(IBookingService service, Booking booking)
         {
             return await service.CreateBooking(booking);
         }
