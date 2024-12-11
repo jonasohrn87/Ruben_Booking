@@ -1,4 +1,5 @@
-﻿using Ruben_Booking.API.Services;
+﻿using Ruben_Booking.API.ErrorHandling;
+using Ruben_Booking.API.Services;
 using Ruben_Booking.API.Services.Interfaces;
 
 namespace Ruben_Booking.API.Extensions
@@ -12,6 +13,7 @@ namespace Ruben_Booking.API.Extensions
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<ErrorHandler>();
 
             services.AddCors(options =>
                 options.AddPolicy("AllowAll", policy =>
