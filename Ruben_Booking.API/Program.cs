@@ -12,6 +12,7 @@ namespace Ruben_Booking.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDefaultServices();
+            
             builder.Services.AddDbContext<RubenContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddApplicationServices();

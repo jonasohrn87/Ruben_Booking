@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Ruben_Booking.API.Database;
 using Ruben_Booking.API.Database.Models;
 using Ruben_Booking.API.ErrorHandling;
@@ -17,20 +18,18 @@ namespace Ruben_Booking.API.Services
             _errorHandler = errorHandler;
         }
 
-        public Task<IResult> CreateBooking(Booking newBooking)
+        public async Task<IResult> CreateBooking(Booking newBooking)
         {
-            return _errorHandler.Handle(async () =>
-            {
-                var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == newBooking.RoomId);
+                var room = await _context.Rooms.FindAsync(newBooking.RoomId);
                 if (room == null)
                 {
-                    throw new ArgumentException($"Room with id {newBooking.RoomId} does not exist.");
+                    return Results.NotFound($"Room with id {newBooking.RoomId} does not exist.");
                 }
 
-                var employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == newBooking.PersonId);
+                var employee = await _context.Employees.FindAsync(newBooking.RoomId);
                 if (employee == null)
                 {
-                    throw new ArgumentException($"Employee with id {newBooking.PersonId} does not exist.");
+                    return Results.NotFound($"Employee with id {newBooking.PersonId} does not exist.");
                 }
 
                 var bookingAlreadyExists =
@@ -38,13 +37,13 @@ namespace Ruben_Booking.API.Services
                         b => b.RoomId == newBooking.RoomId && b.DateFrom == newBooking.DateFrom);
                 if (bookingAlreadyExists != null)
                 {
-                    throw new ArgumentException("A booking for this room and date already exists.");
+                    return Results.Problem("A booking on the specified date and time already exists");
                 }
 
-                var booking = await _context.AddAsync(newBooking);
+                await _context.AddAsync(newBooking);
                 await _context.SaveChangesAsync();
-                return Results.Created($"/api/booking/create/{booking.Entity.Id}", booking);
-            });
+                return Results.Created($"/api/bookings/create/{newBooking.Id}", newBooking);
+          
         }
         public async Task<IResult> DeleteBookingById(int id)
         {

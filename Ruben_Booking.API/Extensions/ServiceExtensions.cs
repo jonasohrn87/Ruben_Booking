@@ -1,6 +1,7 @@
 ﻿using Ruben_Booking.API.ErrorHandling;
 using Ruben_Booking.API.Services;
 using Ruben_Booking.API.Services.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace Ruben_Booking.API.Extensions
 {
