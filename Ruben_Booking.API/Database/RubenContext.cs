@@ -32,6 +32,11 @@ namespace Ruben_Booking.API.Database
                 new Room { Id = 3, Name = "Vinterstugan", HasProjector = false, HasWhiteBoard = true, IsInService = true, MaxSeats = 6, Description = "Konferensrum 3" },
                 new Room { Id = 4, Name = "Vårsolen", HasProjector = true, HasWhiteBoard = true, IsInService = false, MaxSeats = 6, Description = "Konferensrum 4" }
             );
+            modelBuilder.Entity<Booking>().HasData(
+                new Booking { Id = 1, RoomId = 1, PersonId = 1, DateFrom = new DateTime(2024, 12, 20, 0, 0, 0, DateTimeKind.Local), DateTo = new DateTime(2024, 12, 20, 23, 59, 59, DateTimeKind.Local), Participants = new List<string> { "Hasse Jansson" } },
+                new Booking { Id = 2, RoomId = 2, PersonId = 2, DateFrom = new DateTime(2024, 12, 22, 0, 0, 0, DateTimeKind.Local), DateTo = new DateTime(2024, 12, 24, 23, 59, 59, DateTimeKind.Local), Participants = new List<string> ()},
+                new Booking { Id = 3, RoomId = 3, PersonId = 3, DateFrom = new DateTime(2024, 12, 19, 12, 0, 0, DateTimeKind.Local), DateTo = new DateTime(2024, 12, 19, 16, 0, 0, DateTimeKind.Local), Participants = new List<string> ()}
+            );
         }
     }
 }

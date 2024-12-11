@@ -4,32 +4,40 @@ using Xunit.Abstractions;
 using Ruben_Booking.API.Database;
 using Ruben_Booking.API.Database.Models;
 using Ruben_Booking.API.Services;
+using Ruben_Booking.API.Tests.Database;
 
 namespace Ruben_Booking.API.Tests.Endpoints
 {
     public class ApiTests
     {
         private readonly ITestOutputHelper _output;
-        private readonly RubenContext _context;
+        private readonly TestCopyDbContext _context;
         private readonly DbContextOptions<RubenContext> _options;
         private const string EMPLOYEE_EMAIL = "Hasse.Jansson@Snut.se";
         private const string CONSULTANT_EMAIL = "Janne.Claesson@Firman.se";
         private const int ID = 1;
+        private const int ROOM_ID = 1;
+        private const int PERSON_ID = 1;
+        private readonly DateTime testStartDate = new DateTime(2024, 12, 20, 0, 0, 0, DateTimeKind.Local);
+        private readonly DateTime testEndDate = new DateTime(2024, 12, 20, 23, 59, 59, DateTimeKind.Local);
 
         public ApiTests(ITestOutputHelper output)
         {
             _options = new DbContextOptionsBuilder<RubenContext>()
-                .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=RubenDB")
+                .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=RubenDB_TestDB")
                 .Options;
             _output = output;
-            _context = new RubenContext(_options);
+            _context = new TestCopyDbContext(_options);
+
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
         }
         // Employee tests
         [Fact]
         public async Task GetEmployeeById_ReturnsOk_WhenUserExists()
         {
             const string PHONE_NUMBER = "0738239122";
-            
+
             var employeeService = new EmployeeService(_context);
 
             var result = await employeeService.GetUserById(ID);
@@ -95,7 +103,7 @@ namespace Ruben_Booking.API.Tests.Endpoints
 
         //Room tests
         [Fact]
-        public async Task GetAllRooms_ReturnsOk_WhenRoomsExist ()
+        public async Task GetAllRooms_ReturnsOk_WhenRoomsExist()
         {
             const int AMOUNT_OF_ROOMS = 4;
 
@@ -108,7 +116,7 @@ namespace Ruben_Booking.API.Tests.Endpoints
             Assert.Equal(AMOUNT_OF_ROOMS, rooms.Count);
         }
         [Fact]
-        public async Task GetRoomById_ReturnsOk_WhenRoomExists ()
+        public async Task GetRoomById_ReturnsOk_WhenRoomExists()
         {
             var roomService = new RoomService(_context);
             var result = await roomService.GetRoomById(ID);
@@ -119,5 +127,65 @@ namespace Ruben_Booking.API.Tests.Endpoints
             Assert.Equal(ID, room.Id);
         }
 
+        [Fact]
+        public async Task GetAllBookings_ReturnsOk_WhenNoBookingsExist()
+        {
+            var bookingService = new BookingService(_context);
+            var result = await bookingService.GetAllBookings();
+
+            var okResult = Assert.IsType<Ok<List<Booking>>>(result);
+            var bookings = Assert.IsType<List<Booking>>(okResult.Value);
+
+            Assert.NotNull(bookings);
+            if (bookings.Count == 0)
+            {
+                Assert.Empty(bookings);
+                _output.WriteLine("No bookings found");
+            }
+            _output.WriteLine($"Amount of bookings: {bookings.Count}");
+        }
+
+        [Fact]
+        public async Task GetAllBookings_ReturnsOk_WhenBookingsExist()
+        {
+            var bookingService = new BookingService(_context);
+            var result = await bookingService.GetAllBookings();
+         
+            var okResult = Assert.IsType<Ok<List<Booking>>>(result);
+            var bookings = Assert.IsType<List<Booking>>(okResult.Value);
+
+            Assert.NotNull(bookings);
+            if (bookings.Count == 0)
+            {
+
+            Assert.NotEmpty(bookings);
+            Assert.All(bookings, booking =>
+            {
+                Assert.NotEqual(0, booking.Id);
+                Assert.NotEqual(0, booking.RoomId);
+                Assert.NotEqual(0, booking.PersonId);
+                Assert.True(booking.DateTo >= booking.DateFrom);
+            });
+            }
+            _output.WriteLine($"Amount of bookings: {bookings.Count}");
+        }
+
+        [Fact]
+        public async Task GetBookingById_ReturnsOk_WhenBookingExists()
+        {
+            var bookingService = new BookingService(_context);
+
+            var result = await bookingService.GetBookingById(ID);
+
+            var okResult = Assert.IsType<Ok<Booking>>(result);
+            var booking = Assert.IsType<Booking>(okResult.Value);
+
+            Assert.Equal(ID, booking.Id);
+            Assert.Equal(ROOM_ID, booking.RoomId);
+            Assert.Equal(PERSON_ID, booking.PersonId);
+            Assert.Equal(testStartDate, booking.DateFrom);
+            Assert.Equal(testEndDate, booking.DateTo);
+            Assert.True(booking.DateTo >= booking.DateFrom);
+        }
     }
 }
