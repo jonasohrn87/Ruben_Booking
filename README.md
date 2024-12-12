@@ -37,3 +37,8 @@ Tillägg
     Myndighet - GDPR.
     Kryptering till databas.
 
+Test
+
+    Backend - Gå till menyn "Test" -> Run all tests
+    Frontend - Klicka på testikonen i verktygsfältet eller npm test via terminalen.
+
