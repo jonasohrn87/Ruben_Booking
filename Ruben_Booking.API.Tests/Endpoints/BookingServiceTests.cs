@@ -38,8 +38,8 @@ namespace Ruben_Booking.API.Tests.Endpoints
             var bookingService = new BookingService(_context, _errorHandler);
             var result = await bookingService.CreateBooking(newBooking);
 
-            var okResult = Assert.IsType<Created<EntityEntry<Booking>>>(result);
-            var bookingEntry = Assert.IsType<EntityEntry<Booking>>(okResult.Value);
+            var okResult = Assert.IsType<Created<Booking>>(result);
+            var bookingEntry = Assert.IsType<Booking>(okResult.Value);
 
         }
         [Fact]
@@ -49,10 +49,10 @@ namespace Ruben_Booking.API.Tests.Endpoints
 
             var bookingService = new BookingService(_context, _errorHandler);
             var createResult = await bookingService.CreateBooking(newBooking);
-            var createdResult = Assert.IsType<Created<EntityEntry<Booking>>>(createResult);
-            var bookingEntry = Assert.IsType<EntityEntry<Booking>>(createdResult.Value);
+            var createdResult = Assert.IsType<Created<Booking>>(createResult);
+            var bookingEntry = Assert.IsType<Booking>(createdResult.Value);
 
-            int bookingId = bookingEntry.Entity.Id;
+            int bookingId = bookingEntry.Id;
 
             var deleteResult = await bookingService.DeleteBookingById(bookingId);
             
